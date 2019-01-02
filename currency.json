@@ -36,39 +36,44 @@
       "Rate": 0.7054
     },
     {
-      "FromCurrency": "USD",
-      "ToCurrency": "EUR",
-      "Rate": 1.144337
+      "FromCurrency": "EUR",
+      "ToCurrency": "CHF",
+      "Rate": 1.12275
     },
     {
-      "FromCurrency": "JPY",
-      "ToCurrency": "USD",
-      "Rate": 110.415
+      "FromCurrency": "EUR",
+      "ToCurrency": "CAD",
+      "Rate": 1.54294
     },
     {
-      "FromCurrency": "USP",
-      "ToCurrency": "GBP",
-      "Rate": 1.26673
+      "FromCurrency": "GBP",
+      "ToCurrency": "JPY",
+      "Rate": 137.59
     },
     {
-      "FromCurrency": "CHF",
-      "ToCurrency": "USD",
-      "Rate": 0.98097
+      "FromCurrency": "GBP",
+      "ToCurrency": "CHF",
+      "Rate": 1.24503
     },
     {
-      "FromCurrency": "CAD",
-      "ToCurrency": "USD",
-      "Rate": 1.36435
+      "FromCurrency": "GBP",
+      "ToCurrency": "CAD",
+      "Rate": 1.71065
     },
     {
-      "FromCurrency": "JPY",
-      "ToCurrency": "EUR",
-      "Rate": 126.357
+      "FromCurrency": "AUD",
+      "ToCurrency": "JPY",
+      "Rate": 76.5386
     },
     {
-      "FromCurrency": "USD",
-      "ToCurrency": "AUD",
-      "Rate": 0.7054
+      "FromCurrency": "AUD",
+      "ToCurrency": "CHF",
+      "Rate": 0.692571
+    },
+    {
+      "FromCurrency": "AUD",
+      "ToCurrency": "CAD",
+      "Rate": 0.692568
     }
   ]
 }
