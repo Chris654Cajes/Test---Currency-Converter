@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.appBanner {
+  padding: auto;
+  background: #4d4d4d;
+  width: 100%;
+  padding: 40px 20px;
+  color: white;
+}
+
+.appBanner .bannerLogo {
+  display: block;
+  float: left;
+}
+
+.appBanner h3 {
+  position: relative;
+  margin-left: 100px;
+}
+
+.navbar {
+  width: 100%;
+  background: #00cc00;
+}
+
+.navbar ul {
+  margin: 0;
+  overflow: hidden;
+  list-style-type: none;
+}
+
+.navbar ul li {
+  float: left;
+}
+
+.navbar ul li a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar ul li a:hover {
+  background: #4d4d4d;
+  color: #00ff00;
+}
+
+@media only screen and (max-width: 600px) {
+  .appBanner {
+    display: none;
+  }
+}
+
+.formLabel {
+  text-align: center;
+  padding: 40px;
+}
+
+.currencyConverterArea {
+  margin: 40px;
+}
+
+.errorsList {
+  display: none;
+  width: 40%;
+  padding: 40px;
+  margin: auto;
+  background: #ffb3b3;
+  border-style: dashed;
+  border-color: #ff1a1a;
+  color: #cc0000;
+}
+
+.result {
+  padding: 40px;
+  text-align: center;
+}

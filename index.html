@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>CSS Table Test</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="table.css" />
+    <link rel="stylesheet" href="input.css" />
+  </head>
+
+  <body>
+    <div class="appBanner">
+      <img
+        class="bannerLogo"
+        src="logo.png"
+        width="70px"
+        height="70px"
+        alt="avatar"
+        style="border-radius: 50%"
+      />
+      <h3>Green Prism</h3>
+    </div>
+
+    <div class="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Studio</a></li>
+        <li><a href="#">Control</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Release</a></li>
+        <li><a href="#">System</a></li>
+      </ul>
+    </div>
+
+    <div class="currencyConverterArea">
+      <h3 class="formLabel">XE Currency Converter</h3>
+
+      <div class="converterForm">
+        <div>
+          <label>Amount:</label> <input type="text" id="txtAmount" />
+          <label>From:</label>
+          <select id="selFromCurrency">
+            <option disabled selected>--</option>
+          </select>
+          <label>To:</label>
+          <select id="selToCurrency">
+            <option disabled selected>--</option>
+          </select>
+        </div>
+        <div><input type="submit" id="btnSubmit" value="Convert" /></div>
+      </div>
+    </div>
+
+    <div class="errorsList"><ul></ul></div>
+    <div class="result">
+      <label></label>
+      <h1></h1>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/json" src="currency.json"></script>
+
+    <script>
+      $(document).ready(function() {
+        var currencies = ['EUR', 'USD', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD'];
+        var errors = [];
+
+        var fromCurrency = '';
+        var toCurrency = '';
+
+        $('.result').hide();
+
+        $.each(currencies, function(key, value) {
+          $('#selFromCurrency').append('<option>' + value + '</option>');
+          $('#selToCurrency').append('<option>' + value + '</option>');
+        });
+
+        $('#selFromCurrency').change(function() {
+          fromCurrency = $('#selFromCurrency option:selected').text();
+        });
+
+        $('#selToCurrency').change(function() {
+          toCurrency = $('#selToCurrency option:selected').text();
+        });
+
+        $('#btnSubmit').click(function() {
+          var amount = 0.0;
+
+          errors = [];
+          amount = parseFloat($('#txtAmount').val()).toFixed(2);
+
+          if (isNaN(amount)) {
+            errors.push('Please input an amount in decimal form');
+          }
+
+          if (fromCurrency.length == 0) {
+            errors.push("Please select an option for 'From Currency'");
+          }
+
+          if (toCurrency.length == 0) {
+            errors.push("Please select an option for 'To Currency'");
+          }
+
+          if (errors.length > 0) {
+            $('.errorsList ul li').remove();
+
+            $.each(errors, function name(key, value) {
+              $('.errorsList ul').append('<li>' + value + '</li>');
+            });
+
+            $('.errorsList').show();
+          } else {
+            $('.errorsList').hide();
+            $('.result').show();
+
+            const getCurrencyRates = async () => {
+              return await $.ajax({ url: '/currency.json', dataType: 'json' });
+            };
+
+            const getCurrencyAmount = async () => {
+              const currencyRates = await getCurrencyRates();
+
+              $.each(currencyRates.CurrencyRates, function(key, value) {
+                if (
+                  value.FromCurrency == fromCurrency &&
+                  value.ToCurrency == toCurrency
+                ) {
+                  $('.result label').text(
+                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
+                  );
+                  $('.result h1').text(
+                    parseFloat(amount).toFixed(2) * value.Rate +
+                      ' ' +
+                      toCurrency
+                  );
+                } else if (fromCurrency == toCurrency) {
+                  $('.result label').text(
+                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
+                  );
+                  $('.result h1').text(
+                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency
+                  );
+                }
+              });
+            };
+
+            getCurrencyAmount();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
