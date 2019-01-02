@@ -62,7 +62,8 @@
 
     <script>
       $(document).ready(function() {
-        var currencies = ['EUR', 'USD', 'JPY', 'GBP', 'CHF', 'CAD', 'AUD'];
+        var fromCurrencies = ['EUR', 'USD', 'GBP', 'AUD'];
+        var toCurrencies = ['USD', 'JPY', 'CHF', 'CAD'];
         var errors = [];
 
         var fromCurrency = '';
@@ -70,8 +71,11 @@
 
         $('.result').hide();
 
-        $.each(currencies, function(key, value) {
+        $.each(fromCurrencies, function(key, value) {
           $('#selFromCurrency').append('<option>' + value + '</option>');
+        });
+
+        $.each(toCurrencies, function(key, value) {
           $('#selToCurrency').append('<option>' + value + '</option>');
         });
 
