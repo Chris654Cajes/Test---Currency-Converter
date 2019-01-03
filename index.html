@@ -52,13 +52,13 @@
     </div>
 
     <div class="errorsList"><ul></ul></div>
+
     <div class="result">
       <label></label>
       <h1></h1>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/json" src="currency.json"></script>
+    <script src="jquery.min.js"></script>
 
     <script>
       $(document).ready(function() {
@@ -68,6 +68,84 @@
 
         var fromCurrency = '';
         var toCurrency = '';
+
+        var currencyRates = [
+          {
+            FromCurrency: 'EUR',
+            ToCurrency: 'USD',
+            Rate: 1.144337
+          },
+          {
+            FromCurrency: 'USD',
+            ToCurrency: 'JPY',
+            Rate: 110.415
+          },
+          {
+            FromCurrency: 'GBP',
+            ToCurrency: 'USD',
+            Rate: 1.26673
+          },
+          {
+            FromCurrency: 'USD',
+            ToCurrency: 'CHF',
+            Rate: 0.98097
+          },
+          {
+            FromCurrency: 'USD',
+            ToCurrency: 'CAD',
+            Rate: 1.36435
+          },
+          {
+            FromCurrency: 'EUR',
+            ToCurrency: 'JPY',
+            Rate: 126.357
+          },
+          {
+            FromCurrency: 'AUD',
+            ToCurrency: 'USD',
+            Rate: 0.7054
+          },
+          {
+            FromCurrency: 'EUR',
+            ToCurrency: 'CHF',
+            Rate: 1.12275
+          },
+          {
+            FromCurrency: 'EUR',
+            ToCurrency: 'CAD',
+            Rate: 1.54294
+          },
+          {
+            FromCurrency: 'GBP',
+            ToCurrency: 'JPY',
+            Rate: 137.59
+          },
+          {
+            FromCurrency: 'GBP',
+            ToCurrency: 'CHF',
+            Rate: 1.24503
+          },
+          {
+            FromCurrency: 'GBP',
+            ToCurrency: 'CAD',
+            Rate: 1.71065
+          },
+          {
+            FromCurrency: 'AUD',
+            ToCurrency: 'JPY',
+            Rate: 76.5386
+          },
+          {
+            FromCurrency: 'AUD',
+            ToCurrency: 'CHF',
+            Rate: 0.692571
+          },
+          {
+            FromCurrency: 'AUD',
+            ToCurrency: 'CAD',
+            Rate: 0.692568
+          }
+        ];
 
         $('.result').hide();
 
@@ -117,39 +195,29 @@
             $('.errorsList').hide();
             $('.result').show();
 
-            const getCurrencyRates = async () => {
-              return await $.ajax({ url: '/currency.json', dataType: 'json' });
-            };
-
-            const getCurrencyAmount = async () => {
-              const currencyRates = await getCurrencyRates();
-
-              $.each(currencyRates.CurrencyRates, function(key, value) {
-                if (
-                  value.FromCurrency == fromCurrency &&
-                  value.ToCurrency == toCurrency
-                ) {
-                  $('.result label').text(
-                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
-                  );
-                  $('.result h1').text(
-                    parseFloat(amount).toFixed(2) * value.Rate +
-                      ' ' +
-                      toCurrency
-                  );
-                } else if (fromCurrency == toCurrency) {
-                  $('.result label').text(
-                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
-                  );
-                  $('.result h1').text(
-                    parseFloat(amount).toFixed(2) + ' ' + fromCurrency
-                  );
-                }
-              });
-            };
-
-            getCurrencyAmount();
+            $.each(currencyRates, function(key, value) {
+              if (
+                value.FromCurrency == fromCurrency &&
+                value.ToCurrency == toCurrency
+              ) {
+                $('.result label').text(
+                  parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
+                );
+                $('.result h1').text(
+                  parseFloat(amount).toFixed(2) * value.Rate + ' ' + toCurrency
+                );
+              } else if (fromCurrency == toCurrency) {
+                $('.result label').text(
+                  parseFloat(amount).toFixed(2) + ' ' + fromCurrency + ' = '
+                );
+                $('.result h1').text(
+                  parseFloat(amount).toFixed(2) + ' ' + fromCurrency
+                );
+              }
+            });
           }
+
+          getCurrencyAmount();
         });
       });
     </script>
